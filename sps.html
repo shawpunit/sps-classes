@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coaching Center</title>
+    <style>
+.floating-contact {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+.float-btn {
+    padding: 12px 20px;
+    border-radius: 50px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.bg-whatsapp { background-color: #25D366; }
+.bg-call { background-color: #007bff; }
+        body { font-family: 'Segoe UI', sans-serif; text-align: center; background: #f4f7f6; margin: 0; }
+        .container { max-width: 800px; margin: auto; padding: 20px; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 50px; }
+        .card { background: white; padding: 30px; border-radius: 15px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); background: #007bff; color: white; }
+        .section { display: none; background: white; padding: 40px; border-radius: 15px; margin-top: 20px; text-align: left; }
+        .active { display: block; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+        .btn-pay { background: #28a745; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 20px; }
+        .back-btn { cursor: pointer; color: #007bff; margin-bottom: 20px; display: block; }
+    </style>
+</head>
+<body>
+
+<div class="container" id="main-menu">
+    <h1>Welcome to SPS CLASSES </h1>
+    <div class="menu-grid">
+        <div class="card" onclick="showSection('about')"><h2>About Us</h2></div>
+        <div class="card" onclick="showSection('schedule')"><h2>Class Schedule</h2></div>
+        <div class="card" onclick="showSection('payment')"><h2>Fee Payment</h2></div>
+    </div>
+</div>
+
+<div id="about" class="container section">
+    <span class="back-btn" onclick="showMenu()">← Back to Main Menu</span>
+    
+    <div style="display: flex; flex-wrap: wrap; gap: 30px; align-items: flex-start; margin-bottom: 30px;">
+        <div style="flex: 1; min-width: 250px; text-align: center;">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczMoyD_vcI8ceXCepdkVuT6kUBXw6BpYicczMgndFZgv_swf16qWmZ3jXJt7FlGvirSorL75h190flOyCfB9aBubqjP8tKbYDjSgIbiGjQlsaad_WXxXxOzdNcad8LS_U7NbNlMDfK4YG-onaqclWeQ=w432-h578-s-no-gm?authuser=0" alt="Sir Punit Shaw" style="width: 100%; max-width: 280px; border-radius: 15px; border: 5px solid #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <h3 style="margin-top: 15px; color: var(--primary);">Punit Shaw</h3>
+            <p style="color: var(--accent); font-weight: bold; margin-top: -10px;">Founder & Lead Educator</p>
+        </div>
+
+        <div style="flex: 2; min-width: 300px;">
+            <h2>About Our Coaching</h2>
+            <p>We are a concept-focused learning academy where students build strong fundamentals, academic confidence, and exam readiness through clear explanations, smart study methods, and regular practice.</p>
+            
+            <h3 style="border-bottom: 2px solid var(--accent); display: inline-block;">Qualifications & Experiences</h3>
+            <ul style="list-style: none; padding: 0;">
+		<li>🎓 <strong>B.Sc. in Physics</strong></li>                
+		<li>🎓 <strong>M.Sc. in Physics</strong></li>
+                <li>🎓 <strong>B.Ed. in Physical Science</strong></li>
+                <li>⏳ <strong>7+ Years</strong> of Teaching Experience</li>
+                <li>🏫 <strong>5 Years</strong> of Professional School Experience</li>
+            </ul>
+        </div>
+    </div>
+    
+   <div class="contact-info">
+    <h3>Contact & Location</h3>
+    <p>📍 <strong>Address:</strong> Sodepur, Kolkata</p>
+
+    <p>📞 <strong>Phone:</strong> 
+        <a href="tel:+91 7003666460" style="color: #007bff; text-decoration: none; font-weight: bold;">
+            +91 7003666460
+        </a>
+    </p>
+
+    <p>💬 <strong>WhatsApp:</strong> 
+        <a href="https://wa.me/91 9432413740?text=I%20am%20interested%20in%20SPS%20Classes" 
+           target="_blank" 
+           style="color: #25D366; text-decoration: none; font-weight: bold;">
+            Chat on WhatsApp
+        </a>
+    </p>
+</div>
+</div>
+
+<div id="schedule" class="container section">
+    <span class="back-btn" onclick="showMenu()">← Back to Menu</span>
+    <h2>Class Schedule</h2>
+	<h3>Monday</h3>
+    <table>
+        <tr><th>Time</th><th>Subject</th><th>Class</th></tr>
+        <tr><td>06:00 PM</td><td>PHY, CHEM, MATH </td><td> 6-8  </td></tr>
+        <tr><td>07:00 PM</td><td>PHY, CHEM, MATH </td><td> 9-10 </td></tr>
+    </table>
+
+	<h3>Tuesday</h3>
+    <table>
+        <tr><th>Time</th><th>Subject</th><th>Class</th></tr>
+        <tr><td>06:00 PM</td><td>PHYSICS </td><td> 11  </td></tr>
+        <tr><td>07:00 PM</td><td>PHYSICS </td><td> 12 </td></tr>
+    </table>
+	<h3>Wednesday</h3>
+    <table>
+        <tr><th>Time</th><th>Subject</th><th>Class</th></tr>
+      <tr><td>06:00 PM</td><td>PHY, CHEM, MATH </td><td> 6-8  </td></tr>
+        <tr><td>07:00 PM</td><td>PHY, CHEM, MATH </td><td> 9-10 </td></tr>
+    </table>
+<h3>Thursday</h3>
+    <table>
+        <tr><th>Time</th><th>Subject</th><th>Class</th></tr>
+     <tr><td>06:00 PM</td><td>PHYSICS </td><td> 11  </td></tr>
+        <tr><td>07:00 PM</td><td>PHYSICS </td><td> 12 </td></tr>
+    </table>
+<h3>Friday</h3>
+    <table>
+        <tr><th>Time</th><th>Subject</th><th>Class</th></tr>
+      <tr><td>06:00 PM</td><td>PHY, CHEM, MATH </td><td> 6-8  </td></tr>
+        <tr><td>07:00 PM</td><td>PHY, CHEM, MATH </td><td> 9-10 </td></tr>
+    </table>
+<h3>Saturday</h3>
+    <table>
+        <tr><th>Time</th><th>Subject</th><th>Class</th></tr>
+        <tr><td>06:00 PM</td><td>PHY, CHEM, MATH </td><td> 6-8  </td></tr>
+        <tr><td>07:00 PM</td><td>PHY, CHEM, MATH </td><td> 9-10 </td></tr>
+    </table>
+</div>
+
+<div id="payment" class="container section" style="text-align: center;">
+    <span class="back-btn" onclick="showMenu()">← Back to Menu</span>
+    <h2>Secure Fee Payment</h2>
+    <p>Click below to pay via our secure third-party gateway.</p>
+    <a href="https://rzp.io/yourlink" target="_blank" class="btn-pay">Pay Fees Online</a>
+</div>
+
+<script>
+    function showSection(id) {
+        document.getElementById('main-menu').style.display = 'none';
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+    function showMenu() {
+        document.getElementById('main-menu').style.display = 'block';
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    }
+</script>
+<div class="floating-contact">
+    <a href="tel:+91 7003666460" class="float-btn bg-call">📞 Call Now</a>
+    <a href="https://wa.me/91 9432413740" class="float-btn bg-whatsapp">💬 WhatsApp</a>
+</div>
+
+</body>
+</html>
