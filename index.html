@@ -33,7 +33,7 @@
         .card { background: white; padding: 30px; border-radius: 15px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.3s; }
         .card:hover { transform: translateY(-5px); background: #007bff; color: white; }
         .section { display: none; background: white; padding: 40px; border-radius: 15px; margin-top: 20px; text-align: left; }
-        .active { display: block; }
+        .active { display: block! important; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
         .btn-pay { background: #28a745; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 20px; }
@@ -43,7 +43,7 @@
 <body>
 	<div class="container"id="main-menu">
 <h1>Welcome to SPS Classes </h1>
-<div class="menu-grid">
+<div class="menu-grid"></div>
     <div class="card" onclick="showSection('about')"><h2>About Us</h2></div>
     <div class="card" onclick="showSection('schedule')"><h2>Class Schedule</h2></div>
     <div class="card" onclick="showSection('payment')"><h2>Fee Payment</h2></div>
@@ -172,6 +172,7 @@
 
 </body>
 </html>
+
 
 
 
