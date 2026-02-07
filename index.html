@@ -150,22 +150,34 @@
     <span class="back-btn" onclick="showMenu()">← Back to Main Menu</span>
     <h2>Student Login Portal</h2>
     <p>Enter the ID and Password provided by Punit Sir to view your details.</p>
-   <iframe src="https://script.google.com/macros/s/AKfycbyTPF46aVG843_ouDr90c4noqlaLPuMH9RJfUccInMwArLREzTxgzYWVKd8OMSh6F19/exec"
-        style="width:100%; height:600px; border:none; overflow:hidden;" 
-        scrolling="no">
-</iframe>
-
+ <div id="student-portal-ui" class="card">
+    <h3>Student Portal</h3>
+    <input type="text" id="studentID" placeholder="Enter ID">
+    <input type="password" id="studentPass" placeholder="Password">
+    <button onclick="portalLogin()">Login</button>
+    <div id="studentDetails" style="display:none;">
+        </div>
+</div>
 	</div>
 <script>
-    function showSection(id) {
-        document.getElementById('main-menu').style.display = 'none';
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
+   async function portalLogin() {
+    const id = document.getElementById('studentID').value;
+    const pass = document.getElementById('studentPass').value;
+    const url = "YOUR_APPS_SCRIPT_EXEC_URL"; // Use your /exec link here
+
+    const response = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify({id: id, pass: pass})
+    });
+
+    const data = await response.json();
+    if(data.status === "success") {
+        document.getElementById('studentDetails').style.display = 'block';
+        document.getElementById('studentDetails').innerHTML = `Hello ${data.name}, your fee is ₹${data.amount}`;
+    } else {
+        alert("Wrong ID/Password");
     }
-    function showMenu() {
-        document.getElementById('main-menu').style.display = 'block';
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    }
+}
 </script>
 <div class="floating-contact">
     <a href="tel:+91 7003666460" class="float-btn bg-call">📞 Call Now</a>
@@ -174,6 +186,7 @@
 
 </body>
 </html>
+
 
 
 
