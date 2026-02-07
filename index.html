@@ -45,12 +45,8 @@
     <h1>Welcome to SPS Classes</h1>
     <div class="menu-grid">
         <div class="card" onclick="showSection('about')"><h2>About Us</h2></div>
-        <div class="card" onclick="showSection('schedule')"><h2>Class Schedule</h2></div>
-        <div class="card" onclick="showSection('payment')"><h2>Fee Payment</h2></div>
-        <div class="card" onclick="showSection('student-portal')" style="background: #eef6ff;">
-            <h2>Student Login</h2>
-            <p>View Personal Schedule & Fees</p>
-        </div>
+        <div class="card" onclick="showSection('repository')"><h2>Repository</h2></div>
+        <div class="card" onclick="showSection('student-portal')" style="background: #eef6ff;"><h2>Student Login</h2></div>
     </div>
 </div>
 
@@ -76,13 +72,15 @@
     </table>
 </div>
 
-<div id="payment" class="container section" style="text-align: center;">
-    <span class="back-btn" onclick="showMenu()">← Back to Menu</span>
-    <h2>Secure Fee Payment</h2>
-    <p>Use UPI for direct, zero-fee payments.</p>
-    <a href="upi://pay?pa=7003666460@okbizaxis&pn=SPS%20Classes&cu=INR" class="pay-link">Pay Fees via UPI</a>
+<div id="repository" class="container section">
+    <span class="back-btn" onclick="showMenu()">← Back to Main Menu</span>
+    <div class="breadcrumb" id="repo-breadcrumb" style="margin-bottom: 20px; color: #666;">
+        Location: <span onclick="resetRepo()" style="color: #007bff; cursor: pointer;">Repository</span>
+    </div>
+    <h2 id="repo-title">Select Board</h2>
+    <div class="repo-grid" id="repo-content" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px;">
+        </div>
 </div>
-
 <div id="student-portal" class="container section">
     <span class="back-btn" onclick="showMenu()">← Back to Menu</span>
     <h2>Student Login</h2>
@@ -168,6 +166,57 @@
             btn.disabled = false;
         }
     }
+    const repoData = {
+    "CBSE": {
+        "Class 10": { "Physics": "DRIVE_LINK", "Maths": "DRIVE_LINK" },
+        "Class 12": { "Physics": "DRIVE_LINK" }
+    },
+    "ICSE": {
+        "Class 10": { "Chemistry": "DRIVE_LINK" }
+    },
+    "West Bengal Board": {
+        "Class 10": { "Physical Science": "DRIVE_LINK" }
+    }
+};
+
+let currentPath = [];
+
+function renderRepo() {
+    const content = document.getElementById('repo-content');
+    const title = document.getElementById('repo-title');
+    content.innerHTML = '';
+    let target = repoData;
+    currentPath.forEach(step => { target = target[step]; });
+
+    if (typeof target === 'string') {
+        window.open(target, '_blank');
+        currentPath.pop();
+        renderRepo();
+        return;
+    }
+
+    Object.keys(target).forEach(key => {
+        let div = document.createElement('div');
+        div.style = "padding: 15px; border: 1px solid #ddd; border-radius: 10px; text-align: center; cursor: pointer; background: #fff;";
+        div.innerText = key;
+        div.onclick = () => { currentPath.push(key); renderRepo(); };
+        content.appendChild(div);
+    });
+
+    title.innerText = currentPath.length === 0 ? "Select Board" : currentPath[currentPath.length - 1];
+    updateBreadcrumb();
+}
+
+function resetRepo() { currentPath = []; renderRepo(); }
+function updateBreadcrumb() {
+    let bc = document.getElementById('repo-breadcrumb');
+    bc.innerHTML = 'Location: <span onclick="resetRepo()" style="color:#007bff; cursor:pointer;">Repository</span>';
+    currentPath.forEach((step, index) => {
+        bc.innerHTML += ` > <span onclick="jumpTo(${index})" style="color:#007bff; cursor:pointer;">${step}</span>`;
+    });
+}
+function jumpTo(index) { currentPath = currentPath.slice(0, index + 1); renderRepo(); }
+    
 </script>
 
 <div class="floating-contact">
@@ -177,6 +226,7 @@
 
 </body>
 </html>
+
 
 
 
