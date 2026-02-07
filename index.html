@@ -9,34 +9,25 @@
         body { font-family: 'Segoe UI', sans-serif; text-align: center; background: var(--light); margin: 0; padding-bottom: 80px; }
         .container { max-width: 800px; margin: auto; padding: 20px; }
         
-        /* Menu Styling */
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px; }
         .card { background: white; padding: 25px; border-radius: 15px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.3s; margin-bottom: 20px; }
         .card:hover { transform: translateY(-5px); border-bottom: 4px solid var(--primary); }
         
-        /* Section Visibility */
         .section { display: none; background: white; padding: 30px; border-radius: 15px; margin-top: 20px; text-align: left; animation: fadeIn 0.5s; }
         .active { display: block !important; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Form Styling */
         input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
         .btn-login { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        
-        /* Table Styling */
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
-        th { background: #eee; }
-
-        /* Floating Contact */
-        .floating-contact { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 2000; }
-        .float-btn { padding: 12px 20px; border-radius: 50px; color: white; text-decoration: none; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 8px; }
-        .bg-whatsapp { background-color: #25D366; }
-        .bg-call { background-color: var(--primary); }
         
         .back-btn { cursor: pointer; color: var(--primary); margin-bottom: 20px; display: inline-block; font-weight: bold; }
         .result-box { margin-top: 20px; padding: 20px; border-radius: 10px; background: #e3f2fd; border-left: 5px solid var(--primary); }
         .pay-link { display: inline-block; margin-top: 15px; padding: 10px 20px; background: var(--success); color: white; text-decoration: none; border-radius: 5px; font-weight: bold; }
+
+        .floating-contact { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 2000; }
+        .float-btn { padding: 12px 20px; border-radius: 50px; color: white; text-decoration: none; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 8px; }
+        .bg-whatsapp { background-color: #25D366; }
+        .bg-call { background-color: var(--primary); }
     </style>
 </head>
 <body>
@@ -59,15 +50,16 @@
         <li>⏳ 7+ Years Teaching Experience</li>
     </ul>
 </div>
+
 <div id="repository" class="container section">
     <span class="back-btn" onclick="showMenu()">← Back to Main Menu</span>
     <div class="breadcrumb" id="repo-breadcrumb" style="margin-bottom: 20px; color: #666;">
         Location: <span onclick="resetRepo()" style="color: #007bff; cursor: pointer;">Repository</span>
     </div>
     <h2 id="repo-title">Select Board</h2>
-    <div class="repo-grid" id="repo-content" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px;">
-        </div>
+    <div class="repo-grid" id="repo-content" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px;"></div>
 </div>
+
 <div id="student-portal" class="container section">
     <span class="back-btn" onclick="showMenu()">← Back to Menu</span>
     <h2>Student Login</h2>
@@ -76,15 +68,12 @@
         <input type="password" id="studentPass" placeholder="Enter Password">
         <button class="btn-login" onclick="portalLogin()">View My Details</button>
     </div>
-    
     <div id="studentDetails" class="result-box" style="display:none;">
         <h3 id="resName"></h3>
         <p><strong>Schedule:</strong> <span id="resSched"></span></p>
         <p><strong>Pending Month:</strong> <span id="resMonth"></span></p>
         <p><strong>Amount:</strong> ₹<span id="resAmt"></span></p>
-        <div id="payArea">
-            <a id="resPayLink" href="#" class="pay-link">Pay Now (UPI)</a>
-        </div>
+        <div id="payArea"><a id="resPayLink" href="#" class="pay-link">Pay Now (UPI)</a></div>
     </div>
 </div>
 
@@ -93,10 +82,9 @@
         document.getElementById('main-menu').style.display = 'none';
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         document.getElementById(id).classList.add('active');
-        if(id === 'repository')
-resetRepo();
+        if(id === 'repository') resetRepo();
     }
-    
+
     function showMenu() {
         document.getElementById('main-menu').style.display = 'block';
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -106,8 +94,6 @@ resetRepo();
         const id = document.getElementById('studentID').value;
         const pass = document.getElementById('studentPass').value;
         const btn = document.querySelector('.btn-login');
-        
-        // YOUR APPS SCRIPT URL
         const url = "https://script.google.com/macros/s/AKfycbxVxUBEmFg3-uzzPPoxruE_OtxF28-A3Ha2dhZGcOy2NenBFqMkKZ9mmA8Jq2bPlkfF/exec"; 
 
         btn.innerText = "Loading...";
@@ -126,15 +112,10 @@ resetRepo();
                 document.getElementById('resMonth').innerText = data.month;
                 document.getElementById('resAmt').innerText = data.amount;
                 
-                // UPI Deep Link Logic
                 var myUpiId = "sirpunitshaw@okicici"; 
-                var merchantName = "SPS Classes";
-                
                 var upiLink = "upi://pay?pa=" + myUpiId + "&pn=SPS%20Classes&cu=INR&am=" + data.amount;
-
                 document.getElementById('resPayLink').href = upiLink;
 
-                // Color Logic for Status
                 var statusValue = data.payment ? data.payment.toString().toUpperCase().trim() : "";
                 if (statusValue === 'PAID') {
                     document.getElementById('payArea').style.display = 'none';
@@ -144,85 +125,64 @@ resetRepo();
                     document.getElementById('payArea').style.display = 'block';
                     document.getElementById('resMonth').style.color = 'red';
                 }
-
-            } else {
-                alert("Invalid Login Details");
-            }
-        } catch (e) {
-            alert("Connection Error. Please check your Script URL.");
-        } finally {
-            btn.innerText = "View My Details";
-            btn.disabled = false;
-        }
+            } else { alert("Invalid Login Details"); }
+        } catch (e) { alert("Connection Error"); }
+        finally { btn.innerText = "View My Details"; btn.disabled = false; }
     }
+
     const repoData = {
-    "CBSE": {
-        "Class 6": { "Physics": "DRIVE_LINK","Chemistry": "DRIVE_LINK","Maths": "DRIVE_LINK" },
-        "Class 7": { "Physics": "DRIVE_LINK","Chemistry": "DRIVE_LINK","Maths": "DRIVE_LINK" },
-        "Class 8": { "Physics": "DRIVE_LINK","Chemistry": "DRIVE_LINK", "Maths": "DRIVE_LINK" },
-        "Class 9": { "Physics": "DRIVE_LINK","Chemistry": "DRIVE_LINK","Maths": "DRIVE_LINK" },
-        "Class 10":{ "Physics": "DRIVE_LINK","Chemistry": "DRIVE_LINK","Maths": "DRIVE_LINK" },
-        "Class 11":{ "Physics": "DRIVE_LINK" },
-        "Class 12":{ "Physics": "DRIVE_LINK" }
-    },
-    "ICSE": {
-        "Class 6": { "Physics": "DRIVE_LINK","Chemistry": "DRIVE_LINK","Maths": "DRIVE_LINK" },
-        "Class 7": { "Physics": "DRIVE_LINK","Chemistry": "DRIVE_LINK","Maths": "DRIVE_LINK" },
-        "Class 8": { "Physics": "DRIVE_LINK","Chemistry": "DRIVE_LINK", "Maths": "DRIVE_LINK" },
-        "Class 9": { "Physics": "DRIVE_LINK","Chemistry": "DRIVE_LINK","Maths": "DRIVE_LINK" },
-        "Class 10":{ "Physics": "DRIVE_LINK","Chemistry": "DRIVE_LINK","Maths": "DRIVE_LINK" },
-        "Class 11":{ "Physics": "DRIVE_LINK" },
-        "Class 12":{ "Physics": "DRIVE_LINK" }
-    },
-    "West Bengal Board": {
-        "Class 6": { "Physics": "DRIVE_LINK","Chemistry": "DRIVE_LINK","Maths": "DRIVE_LINK" },
-        "Class 7": { "Physics": "DRIVE_LINK","Chemistry": "DRIVE_LINK","Maths": "DRIVE_LINK" },
-        "Class 8": { "Physics": "DRIVE_LINK","Chemistry": "DRIVE_LINK", "Maths": "DRIVE_LINK" },
-        "Class 9": { "Physics": "DRIVE_LINK","Chemistry": "DRIVE_LINK","Maths": "DRIVE_LINK" },
-        "Class 10":{ "Physics": "DRIVE_LINK","Chemistry": "DRIVE_LINK","Maths": "DRIVE_LINK" },
-        "Class 11":{ "Physics": "DRIVE_LINK" },
-        "Class 12":{ "Physics": "DRIVE_LINK" }
-    }
-};
+        "CBSE": generateClasses(),
+        "ICSE": generateClasses(),
+        "West Bengal Board": generateClasses()
+    };
 
-let currentPath = [];
-
-function renderRepo() {
-    const content = document.getElementById('repo-content');
-    const title = document.getElementById('repo-title');
-    content.innerHTML = '';
-    let target = repoData;
-    currentPath.forEach(step => { target = target[step]; });
-
-    if (typeof target === 'string') {
-        window.open(target, '_blank');
-        currentPath.pop();
-        renderRepo();
-        return;
+    function generateClasses() {
+        let classes = {};
+        for(let i=6; i<=10; i++) {
+            classes[`Class ${i}`] = { "Physics": "DRIVE_LINK", "Chemistry": "DRIVE_LINK", "Maths": "DRIVE_LINK" };
+        }
+        classes["Class 11"] = { "Physics": "DRIVE_LINK" };
+        classes["Class 12"] = { "Physics": "DRIVE_LINK" };
+        return classes;
     }
 
-    Object.keys(target).forEach(key => {
-        let div = document.createElement('div');
-        div.style = "padding: 15px; border: 1px solid #ddd; border-radius: 10px; text-align: center; cursor: pointer; background: #fff;";
-        div.innerText = key;
-        div.onclick = () => { currentPath.push(key); renderRepo(); };
-        content.appendChild(div);
-    });
+    let currentPath = [];
 
-    title.innerText = currentPath.length === 0 ? "Select Board" : currentPath[currentPath.length - 1];
-    updateBreadcrumb();
-}
+    function renderRepo() {
+        const content = document.getElementById('repo-content');
+        const title = document.getElementById('repo-title');
+        content.innerHTML = '';
+        let target = repoData;
+        currentPath.forEach(step => { target = target[step]; });
 
-function resetRepo() { currentPath = []; renderRepo(); }
-function updateBreadcrumb() {
-    let bc = document.getElementById('repo-breadcrumb');
-    bc.innerHTML = 'Location: <span onclick="resetRepo()" style="color:#007bff; cursor:pointer;">Repository</span>';
-    currentPath.forEach((step, index) => {
-        bc.innerHTML += ` > <span onclick="jumpTo(${index})" style="color:#007bff; cursor:pointer;">${step}</span>`;
-    });
-}
-function jumpTo(index) { currentPath = currentPath.slice(0, index + 1); renderRepo(); }
-    
+        if (typeof target === 'string') {
+            window.open(target, '_blank');
+            currentPath.pop();
+            renderRepo();
+            return;
+        }
+
+        Object.keys(target).forEach(key => {
+            let div = document.createElement('div');
+            div.style = "padding: 15px; border: 1px solid #ddd; border-radius: 10px; text-align: center; cursor: pointer; background: #fff;";
+            div.innerText = key;
+            div.onclick = () => { currentPath.push(key); renderRepo(); };
+            content.appendChild(div);
+        });
+
+        title.innerText = currentPath.length === 0 ? "Select Board" : currentPath[currentPath.length - 1];
+        updateBreadcrumb();
+    }
+
+    function resetRepo() { currentPath = []; renderRepo(); }
+    function updateBreadcrumb() {
+        let bc = document.getElementById('repo-breadcrumb');
+        bc.innerHTML = 'Location: <span onclick="resetRepo()" style="color:#007bff; cursor:pointer;">Repository</span>';
+        currentPath.forEach((step, index) => {
+            bc.innerHTML += ` > <span onclick="jumpTo(${index})" style="color:#007bff; cursor:pointer;">${step}</span>`;
+        });
+    }
+    function jumpTo(index) { currentPath = currentPath.slice(0, index + 1); renderRepo(); }
 </script>
 
 <div class="floating-contact">
@@ -232,11 +192,3 @@ function jumpTo(index) { currentPath = currentPath.slice(0, index + 1); renderRe
 
 </body>
 </html>
-
-
-
-
-
-
-
-
