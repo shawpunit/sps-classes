@@ -59,19 +59,6 @@
         <li>⏳ 7+ Years Teaching Experience</li>
     </ul>
 </div>
-
-<div id="schedule" class="container section">
-    <span class="back-btn" onclick="showMenu()">← Back to Menu</span>
-    <h2>Class Schedule</h2>
-    <table>
-        <tr><th>Day</th><th>Time</th><th>Subject/Class</th></tr>
-        <tr><td>Mon/Wed/Fri</td><td>06:00 PM</td><td>6-8 (PCM)</td></tr>
-        <tr><td>Mon/Wed/Fri</td><td>07:30 PM</td><td>9-10 (PCM)</td></tr>
-        <tr><td>Tue/Thu</td><td>06:00 PM</td><td>Class 11 (Physics)</td></tr>
-        <tr><td>Tue/Thu</td><td>07:30 PM</td><td>Class 12 (Physics)</td></tr>
-    </table>
-</div>
-
 <div id="repository" class="container section">
     <span class="back-btn" onclick="showMenu()">← Back to Main Menu</span>
     <div class="breadcrumb" id="repo-breadcrumb" style="margin-bottom: 20px; color: #666;">
@@ -106,6 +93,13 @@
         document.getElementById('main-menu').style.display = 'none';
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         document.getElementById(id).classList.add('active');
+        if(id === 'repository')
+
+Why this works
+
+resetRepo();
+
+    }
     }
 
     function showMenu() {
@@ -243,6 +237,7 @@ function jumpTo(index) { currentPath = currentPath.slice(0, index + 1); renderRe
 
 </body>
 </html>
+
 
 
 
