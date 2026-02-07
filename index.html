@@ -79,7 +79,8 @@
 <div id="payment" class="container section" style="text-align: center;">
     <span class="back-btn" onclick="showMenu()">← Back to Menu</span>
     <h2>Secure Fee Payment</h2>
-    <a href="https://rzp.io/rzp/mfzWfvI" target="_blank" class="pay-link">Pay Fees Online</a>
+    <p>Use UPI for direct, zero-fee payments.</p>
+    <a href="upi://pay?pa=7003666460@okbizaxis&pn=SPS%20Classes&cu=INR" class="pay-link">Pay Fees via UPI</a>
 </div>
 
 <div id="student-portal" class="container section">
@@ -97,7 +98,7 @@
         <p><strong>Pending Month:</strong> <span id="resMonth"></span></p>
         <p><strong>Amount:</strong> ₹<span id="resAmt"></span></p>
         <div id="payArea">
-            <a id="resPayLink" href="#" target="_blank" class="pay-link">Pay Now</a>
+            <a id="resPayLink" href="#" class="pay-link">Pay Now (UPI)</a>
         </div>
     </div>
 </div>
@@ -119,7 +120,7 @@
         const pass = document.getElementById('studentPass').value;
         const btn = document.querySelector('.btn-login');
         
-        // YOUR CURRENT DEPLOYMENT URL
+        // YOUR APPS SCRIPT URL
         const url = "https://script.google.com/macros/s/AKfycbxVxUBEmFg3-uzzPPoxruE_OtxF28-A3Ha2dhZGcOy2NenBFqMkKZ9mmA8Jq2bPlkfF/exec"; 
 
         btn.innerText = "Loading...";
@@ -138,11 +139,10 @@
                 document.getElementById('resMonth').innerText = data.month;
                 document.getElementById('resAmt').innerText = data.amount;
                 
-                // --- NEW UPI DEEP LINK LOGIC ---
+                // UPI Deep Link Logic
                 var myUpiId = "7003666460@okbizaxis"; 
                 var merchantName = "SPS Classes";
                 
-                // Building the pre-filled UPI URL
                 var upiLink = "upi://pay?pa=" + myUpiId + 
                               "&pn=" + encodeURIComponent(merchantName) + 
                               "&am=" + data.amount + 
@@ -150,7 +150,17 @@
                               "&cu=INR";
 
                 document.getElementById('resPayLink').href = upiLink;
-                // -------------------------------
+
+                // Color Logic for Status
+                var statusValue = data.payment ? data.payment.toString().toUpperCase().trim() : "";
+                if (statusValue === 'PAID') {
+                    document.getElementById('payArea').style.display = 'none';
+                    document.getElementById('resMonth').style.color = 'green';
+                    document.getElementById('resMonth').innerText += " (PAID)";
+                } else {
+                    document.getElementById('payArea').style.display = 'block';
+                    document.getElementById('resMonth').style.color = 'red';
+                }
 
             } else {
                 alert("Invalid Login Details");
@@ -171,11 +181,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
