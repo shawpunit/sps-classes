@@ -61,4 +61,170 @@
         Location: <span onclick="resetRepo()" style="color: #007bff; cursor: pointer;">Repository</span>
     </div>
     <h2 id="repo-title">Select Board</h2>
-    <div class="repo-grid" id="repo-content" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(1
+    <div class="repo-grid" id="repo-content" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px;"></div>
+</div>
+
+<div id="student-portal" class="container section">
+    <span class="back-btn" onclick="showMenu()">← Back to Menu</span>
+    <h2>Student Login</h2>
+    <div id="login-form">
+        <input type="text" id="studentID" placeholder="Enter Student ID">
+        <input type="password" id="studentPass" placeholder="Enter Password">
+        <button class="btn-login" onclick="portalLogin()">View My Details</button>
+    </div>
+    <div id="studentDetails" class="result-box" style="display:none;">
+        <h3 id="resName"></h3>
+        <p><strong>Schedule:</strong> <span id="resSched"></span></p>
+        <p><strong>Pending Month:</strong> <span id="resMonth"></span></p>
+        <p><strong>Amount:</strong> ₹<span id="resAmt"></span></p>
+        <div id="payArea"><a id="resPayLink" href="#" class="pay-link">Pay Now (UPI)</a></div>
+    </div>
+</div>
+
+<script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxVxUBEmFg3-uzzPPoxruE_OtxF28-A3Ha2dhZGcOy2NenBFqMkKZ9mmA8Jq2bPlkfF/exec";
+
+    function showSection(id) {
+        document.getElementById('main-menu').style.display = 'none';
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        if(id === 'repository') resetRepo();
+    }
+
+    function showMenu() {
+        document.getElementById('main-menu').style.display = 'block';
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    }
+
+    async function portalLogin() {
+        const id = document.getElementById('studentID').value;
+        const pass = document.getElementById('studentPass').value;
+        const btn = document.querySelector('.btn-login');
+
+        btn.innerText = "Loading...";
+        btn.disabled = true;
+
+        try {
+            const getUrl = `${scriptURL}?id=${id}&pass=${pass}&action=login`;
+            const getResp = await fetch(getUrl);
+            const data = await getResp.json();
+
+            if(data.status === "success") {
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('studentDetails').style.display = 'block';
+                document.getElementById('resName').innerText = "Hello, " + data.name;
+                document.getElementById('resSched').innerText = data.schedule;
+                document.getElementById('resMonth').innerText = data.month;
+                document.getElementById('resAmt').innerText = data.amount;
+                
+                var myUpiId = "sirpunitshaw@okicici"; 
+                var upiLink = `upi://pay?pa=${myUpiId}&pn=SPS%20Classes&cu=INR&am=${data.amount}`;
+                document.getElementById('resPayLink').href = upiLink;
+
+                var statusValue = data.payment ? data.payment.toString().toUpperCase().trim() : "";
+                if (statusValue === 'PAID') {
+                    document.getElementById('payArea').style.display = 'none';
+                    document.getElementById('resMonth').style.color = 'green';
+                    document.getElementById('resMonth').innerText += " (PAID)";
+                } else {
+                    document.getElementById('payArea').style.display = 'block';
+                    document.getElementById('resMonth').style.color = 'red';
+                }
+            } else { alert("Invalid Login Details"); }
+        } catch (e) { alert("Connection Error"); }
+        finally { btn.innerText = "View My Details"; btn.disabled = false; }
+    }
+
+    const repoData = {
+        "CBSE": {
+            "Class 6": {
+                "Physics": "1Fn6SdlfefrGHJRbHlbL9Hq8EtWXszFfn",
+                "Chemistry": "13A4ogixbKXoxBO0vE5MvQBMbhalMFcy-",
+                "Maths": "1rRAZZ-iD1EmWSBjLl8Xz1Y9TfE9k5dZy" }, 
+            "Class 7": {
+                "Physics": "1lq4URZTJpdoUyuE2_fxao-DXBNekQ8Dy",
+                "Chemistry": "1bYDZDth4WHarCwVSw7FbysbD21u3Ei7k",
+                "Maths": "10ihD0dRohEOXLfdqpfpxKGB7YJ4QFaXg"},
+            "Class 8": {
+                "Physics": "1IJvBsQ4-kw05JZUKYODewPSkfx19OZm0",
+                "Chemistry": "11m4YRjOq3gX272m38Fdkz6dohlotNXja",
+                "Maths": "1pbUqCe2CLwuLeQXRWvATBTsB14K6BxiH"},
+            "Class 9": {
+                "Physics": "1b-ZhYwsXUcHiGUK4NsclcKsq2fD-qC1S",
+                "Chemistry": "1ycSQHCr23JUFVgT_9C8QNz3fart7Fq1o",
+                "Maths": "18uWdy05kwwDsDHnkZi_xR39X4dG492gO"},
+            "Class 10": {
+                "Physics": "1rJq_HQm9LBmgLTQCI_9bEP8dcuz_fRf",
+                "Chemistry": "1HJxtoEszkvigOfBqZHCJP7vozXMFI-R1",
+                "Maths": "1DFzmzm3EaYj4oME8vcYnhqlYemnyNG9w"},
+            "Class 11": { "Physics": "1HmhBADjGrx0lYdTR8g9mE4zfs0b01Tz6"},
+            "Class 12": { "Physics": "1gGWP_WtT2IIXlDXr9L3bB8Ia5wX0xa4u"}
+        },
+        "ICSE": {
+            "Class 10": { "Physics": "#", "Chemistry": "#", "Maths": "#" }
+        },
+        "West Bengal Board": {
+            "Class 10": { "Physics": "#", "Chemistry": "#", "Maths": "#" }
+        }
+    };
+
+    let currentPath = [];
+
+    function renderRepo() {
+        const content = document.getElementById('repo-content');
+        const title = document.getElementById('repo-title');
+        content.innerHTML = '';
+        let target = repoData;
+        currentPath.forEach(step => { target = target[step]; });
+
+        if (typeof target === 'string') {
+            title.innerText = "SPS Digital Library";
+            content.innerHTML = `<div style="text-align:center;"><p>Fetching files...</p><div class="spinner"></div></div>`;
+
+            fetch(`${scriptURL}?folderId=${target}&action=getFiles`)
+                .then(res => res.json())
+                .then(res => {
+                    if(res.status === "success") {
+                        content.innerHTML = res.files.length === 0 ? "<p>No files found.</p>" : "";
+                        res.files.forEach(file => {
+                            let card = document.createElement('div');
+                            card.style = "background:white; padding:15px; border-radius:10px; border:1px solid #ddd; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;";
+                            card.innerHTML = `<div><span style="font-weight:bold;">${file.name}</span></div><a href="${file.downloadUrl}" target="_blank" class="pay-link" style="margin:0; padding:8px 15px;">📥 Download</a>`;
+                            content.appendChild(card);
+                        });
+                    } else { content.innerHTML = `<p style="color:red;">${res.message}</p>`; }
+                    content.innerHTML += `<button onclick="currentPath.pop(); renderRepo();" style="margin-top:20px; background:none; border:none; color:var(--primary); cursor:pointer; text-decoration:underline; font-weight:bold; width:100%;">← Back</button>`;
+                });
+            return;
+        }
+
+        Object.keys(target).forEach(key => {
+            let div = document.createElement('div');
+            div.style = "padding: 15px; border: 1px solid #ddd; border-radius: 10px; text-align: center; cursor: pointer; background: #fff;";
+            div.innerText = key;
+            div.onclick = () => { currentPath.push(key); renderRepo(); };
+            content.appendChild(div);
+        });
+
+        title.innerText = currentPath.length === 0 ? "Select Board" : currentPath[currentPath.length - 1];
+        updateBreadcrumb();
+    }
+
+    function resetRepo() { currentPath = []; renderRepo(); }
+    function updateBreadcrumb() {
+        let bc = document.getElementById('repo-breadcrumb');
+        bc.innerHTML = 'Location: <span onclick="resetRepo()" style="color:var(--primary); cursor:pointer;">Repository</span>';
+        currentPath.forEach((step, index) => {
+            bc.innerHTML += ` > <span onclick="jumpTo(${index})" style="color:var(--primary); cursor:pointer;">${step}</span>`;
+        });
+    }
+    function jumpTo(index) { currentPath = currentPath.slice(0, index + 1); renderRepo(); }
+</script>
+
+<div class="floating-contact">
+    <a href="tel:+917003666460" class="float-btn bg-call">📞 Call Now</a>
+    <a href="https://wa.me/919432413740" class="float-btn bg-whatsapp">💬 WhatsApp</a>
+</div>
+
+</body>
+</html>
