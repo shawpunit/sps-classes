@@ -24,61 +24,41 @@
         .result-box { margin-top: 20px; padding: 20px; border-radius: 10px; background: #e3f2fd; border-left: 5px solid var(--primary); }
         .pay-link { display: inline-block; margin-top: 15px; padding: 10px 20px; background: var(--success); color: white; text-decoration: none; border-radius: 5px; font-weight: bold; }
 
-  /* Board selection remains a grid */
-.repo-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
-    gap: 15px; 
-}
+        /* REPOSITORY GRID & LIST STYLES */
+        .repo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
 
-/* NEW: This class removes the grid and makes files a clean list */
-.file-list-view {
-    display: flex !important;
-    flex-direction: column !important;
-    grid-template-columns: none !important;
-    width: 100%;
-}
+        /* Forces full width list for files to prevent squashing */
+        .file-list-view { display: flex !important; flex-direction: column !important; grid-template-columns: none !important; width: 100%; }
 
-.file-card {
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    border: 1px solid #ddd;
-    margin-bottom: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: left;
-    gap: 15px;
-    width: 100%;
-    box-sizing: border-box;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
+        .file-card {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            gap: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
 
-.file-info {
-    flex: 1; /* Allows text to take all space on the left */
-    min-width: 0; /* Necessary for text truncation or wrapping */
-}
+        .file-info { flex: 1; min-width: 0; }
+        .file-info span { font-weight: bold; color: #333; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-.file-info span {
-    font-weight: bold;
-    color: #333;
-    display: block;
-    white-space: nowrap; /* Forces single line */
-    overflow: hidden;
-    text-overflow: ellipsis; /* Adds '...' if name is too long */
-}
-
-.download-btn {
-    white-space: nowrap;
-    flex-shrink: 0; /* Prevents button from getting squashed */
-    background: var(--success);
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-weight: bold;
-}
+        .download-btn {
+            white-space: nowrap;
+            flex-shrink: 0;
+            background: var(--success);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
 
         .spinner { border: 4px solid rgba(0,0,0,0.1); width: 36px; height: 36px; border-radius: 50%; border-top-color: var(--primary); animation: spin 1s linear infinite; margin: 20px auto; }
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -116,7 +96,7 @@
         Location: <span onclick="resetRepo()" style="color: #007bff; cursor: pointer;">Repository</span>
     </div>
     <h2 id="repo-title">Select Board</h2>
-    <div class="repo-grid" id="repo-content" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px;"></div>
+    <div class="repo-grid" id="repo-content"></div>
 </div>
 
 <div id="student-portal" class="container section">
@@ -213,32 +193,34 @@
         currentPath.forEach(step => { target = target[step]; });
 
         if (typeof target === 'string') {
+            content.classList.add('file-list-view');
             title.innerText = "SPS Digital Library";
-            content.innerHTML = `<div style="text-align:center;"><p>Fetching files...</p><div class="spinner"></div></div>`;
+            content.innerHTML = `<div style="text-align:center; width:100%;"><p>Fetching chapters...</p><div class="spinner"></div></div>`;
 
             fetch(`${scriptURL}?folderId=${target}&action=getFiles`)
                 .then(res => res.json())
                 .then(res => {
                     if(res.status === "success") {
-                        content.innerHTML = res.files.length === 0 ? "<p>No files found.</p>" : "";
+                        content.innerHTML = res.files.length === 0 ? "<p style='width:100%; text-align:center;'>No chapters found.</p>" : "";
                         res.files.forEach(file => {
                             let card = document.createElement('div');
                             card.className = "file-card";
                             card.innerHTML = `
                                 <div class="file-info">
-                                    <span style="font-weight:bold; color:#333;">${file.name}</span>
-                                    <br><small style="color:#888;">Study Material</small>
+                                    <span>${file.name}</span>
+                                    <small style="color:#888;">Class Material</small>
                                 </div>
-                                <a href="${file.downloadUrl}" target="_blank" class="pay-link download-btn">📥 Download</a>
+                                <a href="${file.downloadUrl}" target="_blank" class="download-btn">📥 Download</a>
                             `;
                             content.appendChild(card);
                         });
-                    } else { content.innerHTML = `<p style="color:red;">${res.message}</p>`; }
+                    } else { content.innerHTML = `<p style="color:red; width:100%; text-align:center;">${res.message}</p>`; }
                     content.innerHTML += `<button onclick="currentPath.pop(); renderRepo();" style="margin-top:20px; background:none; border:none; color:var(--primary); cursor:pointer; text-decoration:underline; font-weight:bold; width:100%;">← Back</button>`;
                 });
             return;
         }
 
+        content.classList.remove('file-list-view');
         Object.keys(target).forEach(key => {
             let div = document.createElement('div');
             div.style = "padding: 15px; border: 1px solid #ddd; border-radius: 10px; text-align: center; cursor: pointer; background: #fff;";
@@ -269,5 +251,3 @@
 
 </body>
 </html>
-
-
