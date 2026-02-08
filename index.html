@@ -67,6 +67,38 @@
         .float-btn { padding: 12px 20px; border-radius: 50px; color: white; text-decoration: none; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 8px; }
         .bg-whatsapp { background-color: #25D366; }
         .bg-call { background-color: var(--primary); }
+   /* Contact Grid Styling */
+.contact-section { margin-top: 30px; text-align: center; }
+.contact-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+    gap: 15px; 
+    margin-top: 20px; 
+}
+.contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.contact-item:hover { transform: translateY(-3px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+.contact-item span { margin-top: 8px; }
+
+/* Brand Colors */
+.btn-call { background-color: #007bff; }
+.btn-whatsapp { background-color: #25D366; }
+.btn-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+.btn-youtube { background-color: #FF0000; }
+.btn-facebook { background-color: #1877F2; }
+.btn-email { background-color: #EA4335; }
+.btn-location { background-color: #4285F4; }
     </style>
 </head>
 <body>
@@ -80,16 +112,56 @@
     </div>
 </div>
 
+
 <div id="about" class="container section">
     <span class="back-btn" onclick="showMenu()">← Back to Main Menu</span>
-    <h2>About Our Coaching</h2>
-    <p>Concept-focused learning academy for Physics, Chemistry, and Maths.</p>
+    <h2>About SPS Classes</h2>
+    <p>At <b>SPS Classes</b>, we believe that clarity in concepts is the foundation of academic excellence. 
+Led by Sir Punit Shaw, our institute is dedicated to providing high-quality, 
+result-oriented education through both offline and online modes. We specialize in simplifying the complexities 
+of Science and Mathematics, helping students build confidence and achieve their highest potential.</p>
+ <h3>Our Academic Programs</h3>
+<p>We offer tailored coaching designed to meet the specific needs of students at different stages of their schooling:</p>
     <ul>
-        <li>🎓 B.Sc. Electronics, M.Sc. Physics, B.Ed. Physical Science</li>
-        <li>⏳ 7+ Years Teaching Experience</li>
+        <li><b>Middle School (Classes 6 – 8): </b>Comprehensive coaching for Science and Mathematics. We focus on sparking curiosity and strengthening foundational logic to prepare students for higher-level studies.</li>
+	<li><b>Secondary School (Classes 9 – 10): </b>In-depth preparation for Physics, Chemistry, and Mathematics. Our curriculum focuses on mastering board-exam patterns while ensuring a deep understanding of core scientific principles.</li>
+	<li><b>Senior Secondary (Classes 11 – 12):</b> Specialized coaching exclusively for Physics. We bridge the gap between school exams and competitive standards, making complex theories and numericals easy to grasp.</li>
     </ul>
-</div>
+<h3>Why Choose SPS Classes?</h3>
+ <ul>
+        <li><b>Hybrid Learning:</b> Choose the traditional classroom experience or the flexibility of interactive online sessions.</li>
+	<li><b>Expert Guidance:</b> Benefit from Sir Punit Shaw’s dedicated teaching methodology and personalized attention.</li>
+	<li><b>Concept-Driven Approach:</b> We move beyond rote learning, focusing on "why" and "how" to ensure long-term retention.</li>
+	<li><b>Regular Assessments:</b> Constant tracking of student progress through tests and feedback sessions.</li>
+    </ul>
+<div class="contact-section">
+        <h3>Connect With Us</h3>
+        <div class="contact-grid">
+            <a href="tel:+917003666460" class="contact-item btn-call">
+                <div style="font-size: 24px;">📞</div><span>Call Now</span>
+            </a>
+            <a href="https://wa.me/919432413740" class="contact-item btn-whatsapp">
+                <div style="font-size: 24px;">💬</div><span>WhatsApp</span>
+            </a>
+            <a href="https://instagram.com/YOUR_USERNAME" target="_blank" class="contact-item btn-instagram">
+                <div style="font-size: 24px;">📸</div><span>Instagram</span>
+            </a>
+            <a href="https://youtube.com/@YOUR_CHANNEL" target="_blank" class="contact-item btn-youtube">
+                <div style="font-size: 24px;">🎥</div><span>YouTube</span>
+            </a>
+            <a href="https://facebook.com/YOUR_PAGE" target="_blank" class="contact-item btn-facebook">
+                <div style="font-size: 24px;">👥</div><span>Facebook</span>
+            </a>
+            <a href="mailto:your-email@gmail.com" class="contact-item btn-email">
+                <div style="font-size: 24px;">📧</div><span>Email Us</span>
+            </a>
+            <a href="https://maps.google.com/?q=SPS+Classes+Your+Location" target="_blank" class="contact-item btn-location">
+                <div style="font-size: 24px;">📍</div><span>Our Center</span>
+            </a>
+        </div>
+    </div>
 
+</div>
 <div id="repository" class="container section">
     <span class="back-btn" onclick="showMenu()">← Back to Main Menu</span>
     <div class="breadcrumb" id="repo-breadcrumb" style="margin-bottom: 20px; color: #666;">
@@ -263,5 +335,6 @@
 
 </body>
 </html>
+
 
 
