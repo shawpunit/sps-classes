@@ -25,28 +25,52 @@
         .pay-link { display: inline-block; margin-top: 15px; padding: 10px 20px; background: var(--success); color: white; text-decoration: none; border-radius: 5px; font-weight: bold; }
 
         /* FIXED OVERLAPPING STYLES */
-        .file-card {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #ddd;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-align: left;
-            gap: 15px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .file-info {
-            flex: 1;
-            word-break: break-word;
-        }
-        .download-btn {
-            white-space: nowrap;
-            flex-shrink: 0;
-            margin: 0 !important;
-        }
+      /* Board selection grid */
+.repo-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
+    gap: 15px; 
+}
+
+/* File list view - Forces full width and removes grid layout */
+.file-list-view {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: none !important;
+    width: 100%;
+}
+
+.file-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    gap: 15px;
+    width: 100%;
+    box-sizing: border-box; /* Prevents padding from causing overflow */
+}
+
+.file-info {
+    flex: 1;
+    min-width: 0; /* Important for text wrapping */
+}
+
+.file-info span {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    word-wrap: break-word;
+}
+
+.download-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+}
 
         .spinner { border: 4px solid rgba(0,0,0,0.1); width: 36px; height: 36px; border-radius: 50%; border-top-color: var(--primary); animation: spin 1s linear infinite; margin: 20px auto; }
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -237,3 +261,4 @@
 
 </body>
 </html>
+
