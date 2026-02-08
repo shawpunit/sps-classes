@@ -179,13 +179,51 @@
         content.innerHTML = '';
         let target = repoData;
         currentPath.forEach(step => { target = target[step]; });
+if (typeof target === 'string') {
+    const content = document.getElementById('repo-content');
+    const title = document.getElementById('repo-title');
+    
+    // Show a loading message while the script reads your Drive
+    title.innerText = "SPS Digital Library";
+    content.innerHTML = `
+        <div style="text-align:center; padding:20px;">
+            <p>Fetching latest notes from Google Drive...</p>
+            <div class="spinner" style="display:block; border-top-color:#007bff;"></div>
+        </div>`;
 
-        if (typeof target === 'string') {
-            window.open(target, '_blank');
-            currentPath.pop();
-            renderRepo();
-            return;
+    // CALL THE APPS SCRIPT
+    google.script.run.withSuccessHandler(function(res) {
+        if(res.status === "success") {
+            if(res.files.length === 0) {
+                content.innerHTML = "<p>No files found in this folder yet.</p>";
+            } else {
+                content.innerHTML = ""; // Clear the loading message
+                res.files.forEach(file => {
+                    let fileCard = document.createElement('div');
+                    fileCard.style = "background:white; padding:15px; border-radius:10px; border:1px solid #ddd; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; box-shadow: 0 2px 4px rgba(0,0,0,0.05);";
+                    fileCard.innerHTML = `
+                        <div style="text-align:left;">
+                            <span style="font-weight:bold; color:#333; display:block;">${file.name}</span>
+                            <small style="color:#888;">PDF Document</small>
+                        </div>
+                        <a href="${file.downloadUrl}" target="_blank" style="background:#28a745; color:white; text-decoration:none; padding:8px 15px; border-radius:5px; font-weight:bold; font-size:14px;">📥 Download</a>
+                    `;
+                    content.appendChild(fileCard);
+                });
+            }
+        } else {
+            content.innerHTML = "<p style='color:red;'>Error: " + res.message + "</p>";
         }
+        
+        // Add the Back Button at the bottom
+        content.innerHTML += `
+            <button onclick="currentPath.pop(); renderRepo();" style="margin-top:20px; background:none; border:none; color:#007bff; cursor:pointer; text-decoration:underline; font-weight:bold; width:100%;">
+                ← Back to Subject Selection
+            </button>`;
+            
+    }).getFolderFiles(target); // 'target' is the Folder ID from your repoData
+    return;
+}
 
         Object.keys(target).forEach(key => {
             let div = document.createElement('div');
@@ -225,3 +263,4 @@
 
 </body>
 </html>
+
