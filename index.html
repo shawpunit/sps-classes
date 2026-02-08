@@ -130,21 +130,89 @@
         finally { btn.innerText = "View My Details"; btn.disabled = false; }
     }
 
-    const repoData = {
-        "CBSE": generateClasses(),
-        "ICSE": generateClasses(),
-        "West Bengal Board": generateClasses()
-    };
-
-    function generateClasses() {
-        let classes = {};
-        for(let i=6; i<=10; i++) {
-            classes[`Class ${i}`] = { "Physics": "DRIVE_LINK", "Chemistry": "DRIVE_LINK", "Maths": "DRIVE_LINK" };
-        }
-        classes["Class 11"] = { "Physics": "DRIVE_LINK" };
-        classes["Class 12"] = { "Physics": "DRIVE_LINK" };
-        return classes;
+   const repoData = {
+    "CBSE": {
+        "Class 6": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_PHYSICS_FOLDER_ID",
+            "Chemistry": "https://drive.google.com/drive/folders/YOUR_CHEMISTRY_FOLDER_ID",
+            "Maths": "https://drive.google.com/drive/folders/YOUR_MATHS_FOLDER_ID" }, 
+        "Class 7": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_PHYSICS_FOLDER_ID",
+            "Chemistry": "https://drive.google.com/drive/folders/YOUR_CHEMISTRY_FOLDER_ID",
+            "Maths": "https://drive.google.com/drive/folders/YOUR_MATHS_FOLDER_ID"},
+        "Class 8": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_PHYSICS_FOLDER_ID",
+            "Chemistry": "https://drive.google.com/drive/folders/YOUR_CHEMISTRY_FOLDER_ID",
+            "Maths": "https://drive.google.com/drive/folders/YOUR_MATHS_FOLDER_ID"},
+         "Class 9": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_PHYSICS_FOLDER_ID",
+            "Chemistry": "https://drive.google.com/drive/folders/YOUR_CHEMISTRY_FOLDER_ID",
+            "Maths": "https://drive.google.com/drive/folders/YOUR_MATHS_FOLDER_ID"},
+        "Class 10": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_CLASS10_PHYSICS_ID",
+               "Chemistry": "https://drive.google.com/drive/folders/YOUR_CHEMISTRY_FOLDER_ID",
+            "Maths": "https://drive.google.com/drive/folders/YOUR_CLASS10_MATHS_ID"},
+            "Class 11": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_CLASS10_PHYSICS_ID"},
+         "Class 12": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_CLASS10_PHYSICS_ID"}
+            
+            
+    },
+    "ICSE": {
+               "Class 6": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_PHYSICS_FOLDER_ID",
+            "Chemistry": "https://drive.google.com/drive/folders/YOUR_CHEMISTRY_FOLDER_ID",
+            "Maths": "https://drive.google.com/drive/folders/YOUR_MATHS_FOLDER_ID" }, 
+        "Class 7": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_PHYSICS_FOLDER_ID",
+            "Chemistry": "https://drive.google.com/drive/folders/YOUR_CHEMISTRY_FOLDER_ID",
+            "Maths": "https://drive.google.com/drive/folders/YOUR_MATHS_FOLDER_ID"},
+        "Class 8": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_PHYSICS_FOLDER_ID",
+            "Chemistry": "https://drive.google.com/drive/folders/YOUR_CHEMISTRY_FOLDER_ID",
+            "Maths": "https://drive.google.com/drive/folders/YOUR_MATHS_FOLDER_ID"},
+         "Class 9": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_PHYSICS_FOLDER_ID",
+            "Chemistry": "https://drive.google.com/drive/folders/YOUR_CHEMISTRY_FOLDER_ID",
+            "Maths": "https://drive.google.com/drive/folders/YOUR_MATHS_FOLDER_ID"},
+        "Class 10": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_CLASS10_PHYSICS_ID",
+               "Chemistry": "https://drive.google.com/drive/folders/YOUR_CHEMISTRY_FOLDER_ID",
+            "Maths": "https://drive.google.com/drive/folders/YOUR_CLASS10_MATHS_ID"},
+            "Class 11": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_CLASS10_PHYSICS_ID"},
+         "Class 12": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_CLASS10_PHYSICS_ID"}
+    },
+    "West Bengal Board": {
+        "Class 8": {
+                   "Class 6": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_PHYSICS_FOLDER_ID",
+            "Chemistry": "https://drive.google.com/drive/folders/YOUR_CHEMISTRY_FOLDER_ID",
+            "Maths": "https://drive.google.com/drive/folders/YOUR_MATHS_FOLDER_ID" }, 
+        "Class 7": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_PHYSICS_FOLDER_ID",
+            "Chemistry": "https://drive.google.com/drive/folders/YOUR_CHEMISTRY_FOLDER_ID",
+            "Maths": "https://drive.google.com/drive/folders/YOUR_MATHS_FOLDER_ID"},
+        "Class 8": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_PHYSICS_FOLDER_ID",
+            "Chemistry": "https://drive.google.com/drive/folders/YOUR_CHEMISTRY_FOLDER_ID",
+            "Maths": "https://drive.google.com/drive/folders/YOUR_MATHS_FOLDER_ID"},
+         "Class 9": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_PHYSICS_FOLDER_ID",
+            "Chemistry": "https://drive.google.com/drive/folders/YOUR_CHEMISTRY_FOLDER_ID",
+            "Maths": "https://drive.google.com/drive/folders/YOUR_MATHS_FOLDER_ID"},
+        "Class 10": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_CLASS10_PHYSICS_ID",
+               "Chemistry": "https://drive.google.com/drive/folders/YOUR_CHEMISTRY_FOLDER_ID",
+            "Maths": "https://drive.google.com/drive/folders/YOUR_CLASS10_MATHS_ID"},
+            "Class 11": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_CLASS10_PHYSICS_ID"},
+         "Class 12": {
+            "Physics": "https://drive.google.com/drive/folders/YOUR_CLASS10_PHYSICS_ID"},
     }
+};
 
     let currentPath = [];
 
@@ -192,3 +260,4 @@
 
 </body>
 </html>
+
