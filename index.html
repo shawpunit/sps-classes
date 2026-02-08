@@ -188,7 +188,29 @@
                         content.innerHTML = res.files.length === 0 ? "<p>No files found.</p>" : "";
                         res.files.forEach(file => {
                             let card = document.createElement('div');
-                            card.style = "background:white; padding:15px; border-radius:10px; border:1px solid #ddd; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;";
+                            /* This fix prevents overlapping and ensures the button stays on the right */
+.file-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    gap: 10px; /* Adds space between text and button */
+}
+
+.file-info {
+    flex: 1; /* This makes the text take up all available space */
+    word-break: break-word; /* This prevents long names from overlapping */
+}
+
+.download-btn {
+    white-space: nowrap; /* This ensures the button text stays on one line */
+    flex-shrink: 0; /* This prevents the button from getting squashed */
+}
                             card.innerHTML = `<div><span style="font-weight:bold;">${file.name}</span></div><a href="${file.downloadUrl}" target="_blank" class="pay-link" style="margin:0; padding:8px 15px;">📥 Download</a>`;
                             content.appendChild(card);
                         });
@@ -228,6 +250,7 @@
 
 </body>
 </html>
+
 
 
 
