@@ -24,15 +24,14 @@
         .result-box { margin-top: 20px; padding: 20px; border-radius: 10px; background: #e3f2fd; border-left: 5px solid var(--primary); }
         .pay-link { display: inline-block; margin-top: 15px; padding: 10px 20px; background: var(--success); color: white; text-decoration: none; border-radius: 5px; font-weight: bold; }
 
-        /* FIXED OVERLAPPING STYLES */
-      /* Board selection grid */
+  /* Board selection remains a grid */
 .repo-grid { 
     display: grid; 
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
     gap: 15px; 
 }
 
-/* File list view - Forces full width and removes grid layout */
+/* NEW: This class removes the grid and makes files a clean list */
 .file-list-view {
     display: flex !important;
     flex-direction: column !important;
@@ -43,7 +42,7 @@
 .file-card {
     background: white;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 12px;
     border: 1px solid #ddd;
     margin-bottom: 12px;
     display: flex;
@@ -52,24 +51,33 @@
     text-align: left;
     gap: 15px;
     width: 100%;
-    box-sizing: border-box; /* Prevents padding from causing overflow */
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .file-info {
-    flex: 1;
-    min-width: 0; /* Important for text wrapping */
+    flex: 1; /* Allows text to take all space on the left */
+    min-width: 0; /* Necessary for text truncation or wrapping */
 }
 
 .file-info span {
     font-weight: bold;
     color: #333;
     display: block;
-    word-wrap: break-word;
+    white-space: nowrap; /* Forces single line */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adds '...' if name is too long */
 }
 
 .download-btn {
     white-space: nowrap;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Prevents button from getting squashed */
+    background: var(--success);
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
 }
 
         .spinner { border: 4px solid rgba(0,0,0,0.1); width: 36px; height: 36px; border-radius: 50%; border-top-color: var(--primary); animation: spin 1s linear infinite; margin: 20px auto; }
@@ -261,4 +269,5 @@
 
 </body>
 </html>
+
 
