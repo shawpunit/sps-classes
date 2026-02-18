@@ -189,8 +189,11 @@ of Science and Mathematics, helping students build confidence and achieve their 
         <p><strong>Schedule:</strong> <span id="resSched"></span></p>
         <p><strong>Pending Month:</strong> <span id="resMonth"></span></p>
         <p><strong>Amount:</strong> ₹<span id="resAmt"></span></p>
-        <div id="payArea"><a id="resPayLink" href="#" class="pay-link">Pay Now (UPI)</a></div>
-    </div>
+        <div id="payArea" style="margin-top:15px;">
+    <button id="phonepeBtn" class="pay-link" style="margin:5px;">Pay with PhonePe</button>
+    <button id="gpayBtn" class="pay-link" style="margin:5px;">Pay with Google Pay</button>
+    <button id="paytmBtn" class="pay-link" style="margin:5px;">Pay with Paytm</button>
+		</div>
 </div>
 
 <script>
@@ -227,24 +230,24 @@ of Science and Mathematics, helping students build confidence and achieve their 
                 document.getElementById('resSched').innerText = data.schedule;
                 document.getElementById('resMonth').innerText = data.month;
                 document.getElementById('resAmt').innerText = data.amount;
-                
-                var myUpiId = "7003666460@upi";  // IMPORTANT: use normal UPI, not @okbizaxis
+var upiId = "7003666460@upi";
+var txnId = "SPS" + Date.now();
+var note = `Fees for ${data.month} - ${data.name}`;
+var amount = data.amount;
 
-var txnId = "SPS" + Date.now();  // unique transaction id
+// PhonePe
+var phonepeLink = `intent://pay?pa=${upiId}&pn=SPS%20Classes&tid=${txnId}&tr=${txnId}&tn=${encodeURIComponent(note)}&am=${amount}&cu=INR#Intent;scheme=upi;package=com.phonepe.app;end`;
 
-var upiLink = `upi://pay?pa=${myUpiId}
-&pn=SPS%20Classes
-&mc=0000
-&tid=${txnId}
-&tr=${txnId}
-&tn=Fees%20for%20${encodeURIComponent(data.month)}%20-%20${encodeURIComponent(data.name)}
-&am=${data.amount}
-&cu=INR`;
+// Google Pay
+var gpayLink = `intent://pay?pa=${upiId}&pn=SPS%20Classes&tid=${txnId}&tr=${txnId}&tn=${encodeURIComponent(note)}&am=${amount}&cu=INR#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`;
 
-document.getElementById('resPayLink').onclick = function() {
-    window.location.href = upiLink;
-};
+// Paytm
+var paytmLink = `intent://pay?pa=${upiId}&pn=SPS%20Classes&tid=${txnId}&tr=${txnId}&tn=${encodeURIComponent(note)}&am=${amount}&cu=INR#Intent;scheme=upi;package=net.one97.paytm;end`;
 
+// Assign buttons
+document.getElementById("phonepeBtn").onclick = () => window.location.href = phonepeLink;
+document.getElementById("gpayBtn").onclick = () => window.location.href = gpayLink;
+document.getElementById("paytmBtn").onclick = () => window.location.href = paytmLink;
                 var statusValue = data.payment ? data.payment.toString().toUpperCase().trim() : "";
                 if (statusValue === 'PAID') {
                     document.getElementById('payArea').style.display = 'none';
@@ -353,6 +356,7 @@ document.getElementById('resPayLink').onclick = function() {
 
 </body>
 </html>
+
 
 
 
