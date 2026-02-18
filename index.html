@@ -228,9 +228,22 @@ of Science and Mathematics, helping students build confidence and achieve their 
                 document.getElementById('resMonth').innerText = data.month;
                 document.getElementById('resAmt').innerText = data.amount;
                 
-                var myUpiId = "7003666460@okbizaxis"; 
-                var upiLink = `upi://pay?pa=${myUpiId}&pn=SPS%20Classes&cu=INR&am=${data.amount}`;
-                document.getElementById('resPayLink').href = upiLink;
+                var myUpiId = "7003666460@upi";  // IMPORTANT: use normal UPI, not @okbizaxis
+
+var txnId = "SPS" + Date.now();  // unique transaction id
+
+var upiLink = `upi://pay?pa=${myUpiId}
+&pn=SPS%20Classes
+&mc=0000
+&tid=${txnId}
+&tr=${txnId}
+&tn=Fees%20for%20${encodeURIComponent(data.month)}%20-%20${encodeURIComponent(data.name)}
+&am=${data.amount}
+&cu=INR`;
+
+document.getElementById('resPayLink').onclick = function() {
+    window.location.href = upiLink;
+};
 
                 var statusValue = data.payment ? data.payment.toString().toUpperCase().trim() : "";
                 if (statusValue === 'PAID') {
@@ -340,6 +353,7 @@ of Science and Mathematics, helping students build confidence and achieve their 
 
 </body>
 </html>
+
 
 
 
