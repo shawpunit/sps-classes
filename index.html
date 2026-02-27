@@ -22,7 +22,7 @@
         
         .back-btn { cursor: pointer; color: var(--primary); margin-bottom: 20px; display: inline-block; font-weight: bold; }
         .result-box { margin-top: 20px; padding: 20px; border-radius: 10px; background: #e3f2fd; border-left: 5px solid var(--primary); }
-        .pay-link { display: inline-block; margin-top: 15px; padding: 10px 20px; background: var(--success); color: white; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .pay-link { display: inline-block; margin-top: 15px; padding: 10px 20px; background: var(--success); color: white; text-decoration: none; border-radius: 5px; font-weight: bold; border: none; cursor: pointer; font-size: 16px; }
 
         /* REPOSITORY GRID & LIST STYLES */
         .repo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
@@ -67,40 +67,41 @@
         .float-btn { padding: 12px 20px; border-radius: 50px; color: white; text-decoration: none; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 8px; }
         .bg-whatsapp { background-color: #25D366; }
         .bg-call { background-color: var(--primary); }
-   /* Contact Grid Styling */
-.contact-section { margin-top: 30px; text-align: center; }
-.contact-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
-    gap: 15px; 
-    margin-top: 20px; 
-}
-.contact-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-    border-radius: 12px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 14px;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-.contact-item:hover { transform: translateY(-3px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-.contact-item span { margin-top: 8px; }
+        
+        /* Contact Grid Styling */
+        .contact-section { margin-top: 30px; text-align: center; }
+        .contact-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+            gap: 15px; 
+            margin-top: 20px; 
+        }
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .contact-item:hover { transform: translateY(-3px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .contact-item span { margin-top: 8px; }
 
-/* Brand Colors */
-.btn-call { background-color: #007bff; }
-.btn-whatsapp { background-color: #25D366; }
-.btn-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-.btn-youtube { background-color: #FF0000; }
-.btn-facebook { background-color: #1877F2; }
-.btn-email { background-color: #EA4335; }
-.btn-location { background-color: #4285F4; }
-.btn-telegram { background-color: #0088cc; }
-		
+        /* Brand Colors */
+        .btn-call { background-color: #007bff; }
+        .btn-whatsapp { background-color: #25D366; }
+        .btn-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .btn-youtube { background-color: #FF0000; }
+        .btn-facebook { background-color: #1877F2; }
+        .btn-email { background-color: #EA4335; }
+        .btn-location { background-color: #4285F4; }
+        .btn-telegram { background-color: #0088cc; }
+        
     </style>
 </head>
 <body>
@@ -126,15 +127,15 @@ of Science and Mathematics, helping students build confidence and achieve their 
 <p>We offer tailored coaching designed to meet the specific needs of students at different stages of their schooling:</p>
     <ul>
         <li><b>Middle School (Classes 6 – 8): </b>Comprehensive coaching for Science and Mathematics. We focus on sparking curiosity and strengthening foundational logic to prepare students for higher-level studies.</li>
-	<li><b>Secondary School (Classes 9 – 10): </b>In-depth preparation for Physics, Chemistry, and Mathematics. Our curriculum focuses on mastering board-exam patterns while ensuring a deep understanding of core scientific principles.</li>
-	<li><b>Senior Secondary (Classes 11 – 12):</b> Specialized coaching exclusively for Physics. We bridge the gap between school exams and competitive standards, making complex theories and numericals easy to grasp.</li>
+    <li><b>Secondary School (Classes 9 – 10): </b>In-depth preparation for Physics, Chemistry, and Mathematics. Our curriculum focuses on mastering board-exam patterns while ensuring a deep understanding of core scientific principles.</li>
+    <li><b>Senior Secondary (Classes 11 – 12):</b> Specialized coaching exclusively for Physics. We bridge the gap between school exams and competitive standards, making complex theories and numericals easy to grasp.</li>
     </ul>
 <h3>Why Choose SPS Classes?</h3>
  <ul>
         <li><b>Hybrid Learning:</b> Choose the traditional classroom experience or the flexibility of interactive online sessions.</li>
-	<li><b>Expert Guidance:</b> Benefit from Sir Punit Shaw’s dedicated teaching methodology and personalized attention.</li>
-	<li><b>Concept-Driven Approach:</b> We move beyond rote learning, focusing on "why" and "how" to ensure long-term retention.</li>
-	<li><b>Regular Assessments:</b> Constant tracking of student progress through tests and feedback sessions.</li>
+    <li><b>Expert Guidance:</b> Benefit from Sir Punit Shaw’s dedicated teaching methodology and personalized attention.</li>
+    <li><b>Concept-Driven Approach:</b> We move beyond rote learning, focusing on "why" and "how" to ensure long-term retention.</li>
+    <li><b>Regular Assessments:</b> Constant tracking of student progress through tests and feedback sessions.</li>
     </ul>
 <div class="contact-section">
         <h3>Connect With Us</h3>
@@ -160,9 +161,9 @@ of Science and Mathematics, helping students build confidence and achieve their 
             <a href="https://maps.app.goo.gl/2n9LkgMttshVEjx38" target="_blank" class="contact-item btn-location">
                 <div style="font-size: 24px;">📍</div><span>Our Center</span>
             </a>
-			<a href="https://t.me/+WSOdfZrno91iZTFl" target="_blank" class="contact-item btn-telegram">
+            <a href="https://t.me/+WSOdfZrno91iZTFl" target="_blank" class="contact-item btn-telegram">
     <div style="font-size: 24px;">✈️</div><span>Telegram</span>
-			</a>
+            </a>
         </div>
     </div>
 
@@ -190,10 +191,8 @@ of Science and Mathematics, helping students build confidence and achieve their 
         <p><strong>Pending Month:</strong> <span id="resMonth"></span></p>
         <p><strong>Amount:</strong> ₹<span id="resAmt"></span></p>
         <div id="payArea" style="margin-top:15px;">
-    <button id="phonepeBtn" class="pay-link" style="margin:5px;">Pay with PhonePe</button>
-    <button id="gpayBtn" class="pay-link" style="margin:5px;">Pay with Google Pay</button>
-    <button id="paytmBtn" class="pay-link" style="margin:5px;">Pay with Paytm</button>
-		</div>
+            <button id="payNowBtn" class="pay-link" style="margin:5px; width: 100%; max-width: 250px;">Pay Now</button>
+        </div>
 </div>
 
 <script>
@@ -230,24 +229,18 @@ of Science and Mathematics, helping students build confidence and achieve their 
                 document.getElementById('resSched').innerText = data.schedule;
                 document.getElementById('resMonth').innerText = data.month;
                 document.getElementById('resAmt').innerText = data.amount;
-var upiId = "7003666460@upi";
-var txnId = "SPS" + Date.now();
-var note = `Fees for ${data.month} - ${data.name}`;
-var amount = data.amount;
 
-// PhonePe
-var phonepeLink = `intent://pay?pa=${upiId}&pn=SPS%20Classes&tid=${txnId}&tr=${txnId}&tn=${encodeURIComponent(note)}&am=${amount}&cu=INR#Intent;scheme=upi;package=com.phonepe.app;end`;
+                var upiId = "7003666460@upi";
+                var txnId = "SPS" + Date.now();
+                var note = `Fees for ${data.month} - ${data.name}`;
+                var amount = data.amount;
 
-// Google Pay
-var gpayLink = `intent://pay?pa=${upiId}&pn=SPS%20Classes&tid=${txnId}&tr=${txnId}&tn=${encodeURIComponent(note)}&am=${amount}&cu=INR#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`;
+                // Generic UPI Payment Link (Opens app chooser on user's mobile)
+                var upiLink = `upi://pay?pa=${upiId}&pn=SPS%20Classes&tid=${txnId}&tr=${txnId}&tn=${encodeURIComponent(note)}&am=${amount}&cu=INR`;
 
-// Paytm
-var paytmLink = `intent://pay?pa=${upiId}&pn=SPS%20Classes&tid=${txnId}&tr=${txnId}&tn=${encodeURIComponent(note)}&am=${amount}&cu=INR#Intent;scheme=upi;package=net.one97.paytm;end`;
+                // Assign to single Pay Now button
+                document.getElementById("payNowBtn").onclick = () => window.location.href = upiLink;
 
-// Assign buttons
-document.getElementById("phonepeBtn").onclick = () => window.location.href = phonepeLink;
-document.getElementById("gpayBtn").onclick = () => window.location.href = gpayLink;
-document.getElementById("paytmBtn").onclick = () => window.location.href = paytmLink;
                 var statusValue = data.payment ? data.payment.toString().toUpperCase().trim() : "";
                 if (statusValue === 'PAID') {
                     document.getElementById('payArea').style.display = 'none';
@@ -356,11 +349,3 @@ document.getElementById("paytmBtn").onclick = () => window.location.href = paytm
 
 </body>
 </html>
-
-
-
-
-
-
-
-
